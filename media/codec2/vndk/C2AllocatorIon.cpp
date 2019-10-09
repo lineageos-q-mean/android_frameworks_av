@@ -607,7 +607,7 @@ c2_status_t C2AllocatorIon::newLinearAllocation(
     }
 
     std::shared_ptr<C2AllocationIon> alloc
-        = std::make_shared<C2AllocationIon>(dup(mIonFd), capacity, align, heapMask, flags, mTraits->id);
+        = std::make_shared<C2AllocationIon>(dup(mIonFd), capacity, align, heapMask, flags, getId());
     ret = alloc->status();
     if (ret == C2_OK) {
         *allocation = alloc;
@@ -629,7 +629,7 @@ c2_status_t C2AllocatorIon::priorLinearAllocation(
     // TODO: get capacity and validate it
     const C2HandleIon *h = static_cast<const C2HandleIon*>(handle);
     std::shared_ptr<C2AllocationIon> alloc
-        = std::make_shared<C2AllocationIon>(dup(mIonFd), h->size(), h->bufferFd(), mTraits->id);
+        = std::make_shared<C2AllocationIon>(dup(mIonFd), h->size(), h->bufferFd(), getId());
     c2_status_t ret = alloc->status();
     if (ret == C2_OK) {
         *allocation = alloc;
