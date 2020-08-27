@@ -691,7 +691,7 @@ jobject JAudioTrack::createVolumeShaperOperationObj(
     if (operation->getReplaceId() >= 0) {
         jmethodID jReplace = env->GetMethodID(jBuilderCls, "replace",
                 "(IB)Landroid/media/VolumeShaper$Operation$Builder;");
-        bool join = (flags | media::VolumeShaper::Operation::FLAG_JOIN) != 0;
+        bool join = (flags & media::VolumeShaper::Operation::FLAG_JOIN) != 0;
         jBuilderObj = env->CallObjectMethod(jBuilderCls, jReplace, operation->getReplaceId(), join);
     }
 
